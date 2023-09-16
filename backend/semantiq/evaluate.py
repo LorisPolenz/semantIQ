@@ -4,7 +4,7 @@ from typing import List
 
 from flask import jsonify
 from semantiq.validate import validate_user_input
-
+from semantiq.metrics import log_evaluate, log_get_puzzle
 from semantiq.chatgpt import chatgpt
 
 PROMPT_EVALUATE = '''
@@ -32,8 +32,12 @@ def evaluate_with_gpt(puzzle, word):
 
 def evaluate(puzzle, word):
     if not validate_user_input(word):
+        log_evaluate(word, None, False)
         return jsonify({'error': 'Invalid word'})
     group_pos = puzzle['groupPos']
+
     res = evaluate_with_gpt(puzzle, word)
     score = sum(r in group_pos for r in res[:4])
+    log_evaluate(word, score, True)
+
     return jsonify({'score': score, 'topWords': res[:4]})
