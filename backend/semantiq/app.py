@@ -1,6 +1,8 @@
 import logging
 from flask import Flask, request, Response, make_response, send_file, jsonify
 
+from backend.semantiq.evaluate import evaluate
+
 app = Flask(__name__)
 
 
@@ -49,11 +51,18 @@ def ping():
 
 
 @app.route('/get_puzzle')
-def get_puzzle():
+def get_puzzle_route():
     return jsonify({
         'groupPos': ['happy', 'jump', 'table', 'dog'],
         'groupNeg': ['apple', 'moon', 'blue', 'smile'],
     })
+
+
+# POST /evaluate
+@app.route('/evaluate', methods=['POST'])
+def evaluate_route():
+    evaluation_request = request.get_json()
+    return evaluate(evaluation_request['puzzle'], evaluation_request['word'])
 
 
 app.logger.addFilter(NoPing())
