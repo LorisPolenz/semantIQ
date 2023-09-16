@@ -1,4 +1,7 @@
 import ScoreBoard from "./ScoreBoard";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShare, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
+
 
 function Result({ puzzle, word, result, startGame }) {
   const { groupPos: match, groupNeg: avoid } = puzzle;
@@ -36,9 +39,15 @@ function Result({ puzzle, word, result, startGame }) {
         <div className="text-center text-slate-400 text-lg">score</div>
         <ScoreBoard score={score} maxScore={topWords?.length} />
       </section>
-      <section>
-        <button>Share</button>
-        <button onClick={startGame}>Try again</button>
+      <section className="flex flex-row justify-center gap-4 mt-2">
+        <button className="text-slate-100 bg-slate-400 py-1 px-6 rounded text-lg text-center aspect-square">
+          <FontAwesomeIcon icon={faShare} size="3x" />
+          <p>share</p>
+        </button>
+        <button onClick={startGame} className="text-slate-100 bg-slate-400 py-1 px-6 rounded text-lg text-center aspect-square">
+          <FontAwesomeIcon icon={faRotateLeft} size="3x" />
+          <p>retry</p>
+        </button>
       </section>
 
     </>
