@@ -4,6 +4,10 @@ WORDS_FILE = os.path.join(os.path.dirname(__file__), '../assets/english_words.cs
 
 
 def validate_user_input(input_str: str) -> bool:
+
+    if len(input_str) < 1:
+        return False
+
     with open(WORDS_FILE, 'r') as f:
         keywords = f.read().split('\n')
 
