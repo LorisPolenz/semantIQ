@@ -4,6 +4,7 @@ import Game from './components/Game'
 import Introduction from './components/Introduction'
 import Result from './components/Result';
 import InfoModal from './components/InfoModal';
+import { useCookies } from 'react-cookie';
 
 function App() {
   const [puzzle, setPuzzle] = useState({
@@ -36,10 +37,15 @@ function App() {
       body: JSON.stringify(body)
     }).then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setResult(data);
         setLoadingResult(false);
         setState('result');
+        const attempts = cookies['semantiq-attempts'];
+        if (attempts === undefined || attempts.puzzleId !== puzzle.id) {
+          setCookie('semantiq-attempts', { puzzleId: puzzle.id, attempts: 1, highScore: data.score })
+        } else {
+          setCookie('semantiq-attempts', { puzzleId: puzzle.id, attempts: attempts.attempts + 1, highScore: Math.max(data.score, attempts.highScore) })
+        }
       })
   }
 
@@ -52,6 +58,7 @@ function App() {
       })
   }, []);
 
+  const [cookies, setCookie, removeCookie] = useCookies(['semantiq-attempts']);
 
   return (
     <div className="flex flex-col h-screen justify-start bg-slate-50">
