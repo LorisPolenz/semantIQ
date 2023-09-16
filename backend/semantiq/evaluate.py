@@ -17,7 +17,7 @@ Please output only the words separated by comma, nothing before
 '''
 
 
-def evaluate(puzzle, word):
+def evaluate_with_gpt(puzzle, word):
 
     if not validate_user_input(word):
         return jsonify({'error': 'Invalid word'})
@@ -30,6 +30,11 @@ def evaluate(puzzle, word):
 
     prompt = PROMPT_EVALUATE.format(word, all_w)
 
-    res = chatgpt(prompt, temperature=0.0).strip().split(', ')
+    return chatgpt(prompt, temperature=0.0).strip().split(', ')
+
+
+def evaluate(puzzle, word):
+    group_pos = puzzle['groupPos']
+    res = evaluate_with_gpt(puzzle, word)
     score = sum(r in group_pos for r in res[:4])
     return jsonify({'score': score, 'topWords': res[:4]})
