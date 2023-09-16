@@ -1,7 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import Game from './components/Game'
-import Introduction from './components/Introduction'
 import Result from './components/Result';
 import InfoModal from './components/InfoModal';
 import { useCookies } from 'react-cookie';
@@ -82,10 +81,8 @@ function App() {
       </header>
       <main className='z-0 grow flex flex-col'>
         {showInfoModal ? <InfoModal toggle={toggleInfoModal} /> : null}
-        {state === 'intro' && <Introduction puzzle={puzzle} startGame={startGame} />}
         {state === 'game' && <Game puzzle={puzzle} submit={submit} />}
         {state === 'result' && <Result puzzle={puzzle} word={word} result={result} startGame={startGame} />}
-
       </main>
       <ToastContainer />
     </div>

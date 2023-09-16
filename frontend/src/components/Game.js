@@ -15,8 +15,8 @@ function Game({ puzzle, submit }) {
       </section>
       <section className="text-center my-5 text-slate-800">
         <form onSubmit={handleSubmit} className="place-items-center text-center">
-          <input type="text" autoFocus placeholder="Type your best guess..." className="w-2/3 text-center rounded py-1 mr-1 border-2 border-slate-400 focus-visible:border-slate-400" ></input>
-          <button type="submit" className="bg-slate-400 hover:bg-slate-600 text-slate-100 border border-slate-400 py-1 px-4 rounded inline-flex items-center mt-2">
+          <input type="text" autoFocus placeholder="type your best guess..." className="w-2/3 text-center rounded py-1 mr-1 border-2 border-slate-400 focus-visible:border-slate-400" ></input>
+          <button type="submit" className="bg-slate-400 hover:bg-slate-600 text-slate-100 border-2 border-slate-400 py-1 px-4 rounded inline-flex items-center mt-2">
             ▶
           </button>
         </form>
