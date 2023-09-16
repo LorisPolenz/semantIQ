@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Kanit', ...defaultTheme.fontFamily.sans]
+        sans: ['Kanit', 'sans-serif']
       }
     },
   },
