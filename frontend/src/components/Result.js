@@ -1,3 +1,5 @@
+import ScoreBoard from "./ScoreBoard";
+
 function Result({ puzzle, word, result, startGame }) {
   const { groupPos: match, groupNeg: avoid } = puzzle;
   const { score, topWords } = result;
@@ -15,7 +17,7 @@ function Result({ puzzle, word, result, startGame }) {
   return (
     <>
       <section className="text-center text-slate-400 text-lg">
-        the four closest matches are highlighted
+        results
       </section>
       <section className="pt-8 pb-4">
         {wordGroup(match)}
@@ -30,8 +32,9 @@ function Result({ puzzle, word, result, startGame }) {
         {wordGroup(avoid)}
       </section>
 
-      <section>
-        You've scored {score}/{topWords.length}
+      <section className="grid text-center my-5 text-slate-800 content-center place-items-center">
+        <div className="text-center text-slate-400 text-lg">score</div>
+        <ScoreBoard score={score} maxScore={topWords?.length} />
       </section>
       <section>
         <button>Share</button>
