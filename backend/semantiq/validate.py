@@ -1,5 +1,10 @@
+import os
+
+WORDS_FILE = os.path.join(os.path.dirname(__file__), '../../assets/english_words.csv')
+
+
 def validate_user_input(input_str: str) -> bool:
-    with open('../assets/english_words.csv', 'r') as f:
+    with open(WORDS_FILE, 'r') as f:
         keywords = f.read().split('\n')
 
     if input_str in keywords:
