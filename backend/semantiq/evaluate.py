@@ -3,6 +3,7 @@ from pprint import pprint
 from typing import List
 
 from flask import jsonify
+from semantiq.validate import validate_user_input
 
 from semantiq.chatgpt import chatgpt
 
@@ -17,6 +18,10 @@ Please output only the words separated by comma, nothing before
 
 
 def evaluate(puzzle, word):
+
+    if not validate_user_input(word):
+        return jsonify({'error': 'Invalid word'})
+
     group_neg = puzzle['groupNeg']
     group_pos = puzzle['groupPos']
 
