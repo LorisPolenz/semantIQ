@@ -6,15 +6,12 @@ import { faShare, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 function Result({ puzzle, word, result, startGame }) {
   const { groupPos: match, groupNeg: avoid } = puzzle;
   const { score, topWords } = result;
-  const wordGroup = words => <div className="grid grid-cols-2 gap-2 mx-20 text-slate-700">
-    {
-      words.map(word => {
-        let color = 'text-slate-300';
-        if (match.includes(word) && topWords.includes(word)) color = 'text-green-700';
-        if (avoid.includes(word) && topWords.includes(word)) color = 'text-red-700';
-        return <div className={`text-center text-2xl ${color}`} key={word}>{word}</div>
-      })
-    }
+
+  const wordPair = (w1, w2) =>
+    <div className="space-x-6 text-center"><span className={topWords.includes(w1) ? match.includes(w1) ? 'text-green-700' : avoid.includes(w1) ? 'text-red-700' : null : null}>{w1}</span><span className={topWords.includes(w2) ? match.includes(w2) ? 'text-green-700' : avoid.includes(w2) ? 'text-red-700' : null : null}>{w2}</span></div>
+  const wordGroup = words => <div className="content-center text-2xl text-slate-700 leading-tight">
+    {wordPair(words[0], words[1])}
+    {wordPair(words[2], words[3])}
   </div>
 
   return (
