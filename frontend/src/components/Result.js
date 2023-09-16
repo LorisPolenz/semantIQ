@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShare, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 
 
-function Result({ puzzle, word, result, startGame }) {
+function Result({ puzzle, word, result, startGame, shareResults }) {
   const { groupPos: match, groupNeg: avoid } = puzzle;
   const { score, topWords } = result;
 
@@ -37,7 +37,7 @@ function Result({ puzzle, word, result, startGame }) {
         <ScoreBoard score={score} maxScore={topWords?.length} />
       </section>
       <section className="flex flex-row justify-center gap-4 mt-2">
-        <button className="text-slate-100 bg-slate-400 py-1 px-6 rounded text-lg text-center aspect-square">
+        <button onClick={shareResults} className="text-slate-100 bg-slate-400 py-1 px-6 rounded text-lg text-center aspect-square">
           <FontAwesomeIcon icon={faShare} size="3x" />
           <p>share</p>
         </button>
