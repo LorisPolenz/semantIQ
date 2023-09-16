@@ -18,10 +18,6 @@ Please output only the words separated by comma, nothing before
 
 
 def evaluate_with_gpt(puzzle, word):
-
-    if not validate_user_input(word):
-        return jsonify({'error': 'Invalid word'})
-
     group_neg = puzzle['groupNeg']
     group_pos = puzzle['groupPos']
 
@@ -35,6 +31,8 @@ def evaluate_with_gpt(puzzle, word):
 
 
 def evaluate(puzzle, word):
+    if not validate_user_input(word):
+        return jsonify({'error': 'Invalid word'})
     group_pos = puzzle['groupPos']
     res = evaluate_with_gpt(puzzle, word)
     score = sum(r in group_pos for r in res[:4])
