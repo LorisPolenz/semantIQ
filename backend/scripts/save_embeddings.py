@@ -1,5 +1,5 @@
-from backend.semantiq.embeddings import save_embeddings_to_disk, EMBEDDINGS_FILE
-from backend.semantiq.gen_random_words import get_all_words
+from semantiq.embeddings import save_embeddings_to_disk, EMBEDDINGS_FILE
+from semantiq.gen_random_words import get_all_words
 
 
 def main():

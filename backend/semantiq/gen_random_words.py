@@ -6,7 +6,7 @@ import re
 
 import openai
 
-from backend.semantiq.embeddings import load_default_embeddings, cosine_similarity, embedding
+from semantiq.embeddings import load_default_embeddings, cosine_similarity, embedding
 
 WORDS = '''
 cat, dog, house, car, book, tree, sun, moon, star, lamp, chair, table, pen, paper, pencil, computer, 

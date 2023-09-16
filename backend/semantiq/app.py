@@ -1,7 +1,7 @@
 import logging
 from flask import Flask, request, Response, make_response, send_file, jsonify
 
-from backend.semantiq.evaluate import evaluate
+from semantiq.evaluate import evaluate
 
 app = Flask(__name__)
 

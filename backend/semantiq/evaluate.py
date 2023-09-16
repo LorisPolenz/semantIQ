@@ -4,7 +4,7 @@ from typing import List
 
 from flask import jsonify
 
-from backend.semantiq.chatgpt import chatgpt
+from semantiq.chatgpt import chatgpt
 
 PROMPT_EVALUATE = '''
 please list the following words starting from the most relevant to least relevant to the word "{}"
