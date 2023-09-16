@@ -4,7 +4,9 @@ function InfoModal({ toggle }) {
       <header className="grid grid-cols-3 w-full">
         <div></div>
         <div className="text-2xl text-center align-middle mt-4">semantIQ</div>
-        <button onClick={toggle} className="h-8 aspect-square rounded-full text-slate-400 border-2 border-slate-400 justify-center mt-4 text-center scale-150 justify-self-end">x</button>
+        <button onClick={toggle} className="h-8 aspect-square rounded-full text-slate-400 border-2 border-slate-400 justify-center mt-4 text-center items-center scale-125 justify-self-end">
+          <span className="relative bottom-0.5">x</span>
+        </button>
       </header>
       <main className="flex flex-col grow justify-center gap-4">
         <p>This is a word association game. Your challenge is to come up with a word that is closely related to the first set of words, but not to the second set.</p>
