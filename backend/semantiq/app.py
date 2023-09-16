@@ -1,4 +1,6 @@
 import logging
+from random import randint
+
 from flask import Flask, request, Response, make_response, send_file, jsonify
 
 from semantiq.evaluate import evaluate
@@ -52,10 +54,9 @@ def ping():
 
 @app.route('/get_puzzle')
 def get_puzzle_route():
-    return jsonify({
-        'groupPos': ['happy', 'jump', 'table', 'dog'],
-        'groupNeg': ['apple', 'moon', 'blue', 'smile'],
-    })
+    id = randint(0, 99)
+    # load file
+    return send_file(f'../puzzles/{id}.json')
 
 
 # POST /evaluate
