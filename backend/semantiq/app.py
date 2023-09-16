@@ -51,7 +51,7 @@ def ping():
     return 'pong'
 
 
-START_DATE = datetime.date(2023, 9, 17)
+START_DATE = datetime.date(2023, 9, 16)
 
 
 @app.route('/get_puzzle')
