@@ -1,5 +1,4 @@
 function Result({ puzzle, word, result, startGame }) {
-  const { groupPos: match, groupNeg: avoid } = puzzle;
   const { score, topWords } = result;
   return (
     <>
@@ -14,6 +13,7 @@ function Result({ puzzle, word, result, startGame }) {
         <button>Share</button>
         <button onClick={startGame}>Try again</button>
       </section>
+      
     </>
   )
 }

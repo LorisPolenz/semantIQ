@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Game from './components/Game'
 import Introduction from './components/Introduction'
 import Result from './components/Result';
+import InfoModal from './components/InfoModal';
 
 function App() {
   const [puzzle, setPuzzle] = useState({
@@ -16,7 +17,9 @@ function App() {
   })
   const [loadingResult, setLoadingResult] = useState(true);
   const [word, setWord] = useState('');
-  const [state, setState] = useState('intro');
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const toggleInfoModal = () => setShowInfoModal(!showInfoModal);
+  const [state, setState] = useState('game');
   const startGame = () => setState('game');
   const submit = word => {
     setLoadingResult(true);
@@ -25,7 +28,6 @@ function App() {
       puzzle: puzzle,
       word: word,
     }
-    console.log(body)
     fetch('https://semantiq-backend.onrender.com/evaluate', {
       method: 'POST',
       headers: {
@@ -52,20 +54,17 @@ function App() {
 
 
   return (
-    <div className="App">
-      <header className="App-header">
-        SemantIQ
+    <div className="flex flex-col h-screen justify-start bg-slate-50">
+      <header className="text-lg">
+        <button onClick={toggleInfoModal} className="h-8 aspect-square rounded-full text-slate-400 border-2 border-slate-400 justify-center m-4 text-center float-right scale-150">i</button>
       </header>
-      <main>
+      <main className='z-0 grow flex flex-col'>
+        {showInfoModal ? <InfoModal toggle={toggleInfoModal} /> : null}
         {state === 'intro' && <Introduction puzzle={puzzle} startGame={startGame} />}
         {state === 'game' && <Game puzzle={puzzle} submit={submit} />}
         {state === 'result' && <Result puzzle={puzzle} word={word} result={result} startGame={startGame} />}
 
       </main>
-      <footer>
-        <div>Rules</div>
-        <div>Created @HackZurich by Fela, Loris & Alex</div>
-      </footer>
     </div>
   );
 }
