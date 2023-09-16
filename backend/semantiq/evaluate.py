@@ -26,7 +26,8 @@ def evaluate_with_gpt(puzzle, word):
     group_pos = puzzle['groupPos']
 
     all_w = group_neg + group_pos
-    random.shuffle(all_w)
+    rg = random.Random(0)
+    rg.shuffle(all_w)
 
     prompt = PROMPT_EVALUATE.format(word, all_w)
 
