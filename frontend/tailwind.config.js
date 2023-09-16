@@ -9,11 +9,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['EB Garamond', ...defaultTheme.fontFamily.sans]
-      },
-      fontSize: {
-        '3xl': '2.5rem',
-      },
+        sans: ['Kanit', ...defaultTheme.fontFamily.sans]
+      }
     },
   },
   plugins: [],

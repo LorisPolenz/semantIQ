@@ -4,35 +4,26 @@ function Game({ puzzle, submit }) {
     event.preventDefault();
     submit(event.target[0].value);
   }
-  const wordPair = (w1, w2) =>
-    <div className="space-x-6 text-center"><span>{w1}</span><span>{w2}</span></div>
-  const wordGroup = words => <div className="content-center text-3xl font-bold leading-tight">
-    {wordPair(words[0], words[1])}
-    {wordPair(words[2], words[3])}
-  </div>
+  const wordGroup = words => <div className="grid grid-cols-2 gap-2 mx-20 text-slate-700">
+    {words.map(word => <div className="text-center text-2xl" key={word}>{word}</div>)}</div>
 
   return (
     <>
-      <section className="pt-11 pb-0">
-        <div className="text-center text-xl text-slate-500">stay close to</div>
-        <div className="text-green-800">
+      <section className="pt-8 pb-4">
+        <div className="text-center text-slate-400 text-lg">match these words</div>
         {wordGroup(match)}
-        </div>
       </section>
-      <section className="text-center my-5 text-slate-800 mt-2">
+      <section className="text-center my-5 text-slate-800">
         <form onSubmit={handleSubmit} className="place-items-center text-center">
-          <input type="text" autoFocus placeholder="Find a word..." className="w-2/3 text-center rounded py-1 mr-1 border-2 border-slate-400 focus-visible:border-slate-400" ></input>
-          <button type="submit" className="text-xl bg-slate-400 hover:bg-slate-600 text-slate-100 border border-slate-400 py-1 px-4 rounded inline-flex items-center mt-2">
+          <input type="text" autoFocus placeholder="Type your best guess..." className="w-2/3 text-center rounded py-1 mr-1 border-2 border-slate-400 focus-visible:border-slate-400" ></input>
+          <button type="submit" className="bg-slate-400 hover:bg-slate-600 text-slate-100 border border-slate-400 py-1 px-4 rounded inline-flex items-center mt-2">
             ▶
           </button>
         </form>
       </section>
-
-      <div className="text-center text-xl text-slate-500">and far from</div>
-      <section className="pt-1 pb-0">
-        <div className="text-red-800">
+      <section className="pt-4 pb-8">
         {wordGroup(avoid)}
-        </div>
+        <div className="text-center text-slate-400 text-lg">avoid these words</div>
       </section>
     </>
   )
