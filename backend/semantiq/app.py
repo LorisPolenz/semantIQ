@@ -48,6 +48,14 @@ def ping():
     return 'pong'
 
 
+@app.route('/get_puzzle')
+def get_puzzle():
+    return jsonify({
+        'groupPos': ['happy', 'jump', 'table', 'dog'],
+        'groupNeg': ['apple', 'moon', 'blue', 'smile'],
+    })
+
+
 app.logger.addFilter(NoPing())
 logging.getLogger("werkzeug").addFilter(NoPing())
 logging.getLogger('gunicorn.error').addFilter(NoPing())
