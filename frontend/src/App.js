@@ -5,6 +5,8 @@ import Introduction from './components/Introduction'
 import Result from './components/Result';
 import InfoModal from './components/InfoModal';
 import { useCookies } from 'react-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [puzzle, setPuzzle] = useState({
@@ -37,15 +39,28 @@ function App() {
       body: JSON.stringify(body)
     }).then((res) => res.json())
       .then((data) => {
-        setResult(data);
-        setLoadingResult(false);
-        setState('result');
-        const attempts = cookies['semantiq-attempts'];
-        if (attempts === undefined || attempts.puzzleId !== puzzle.id) {
-          setCookie('semantiq-attempts', { puzzleId: puzzle.id, attempts: 1, highScore: data.score })
+        if (data['error'] === "Invalid word") {
+          toast.error('I don\'t know this word 😔', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         } else {
-          setCookie('semantiq-attempts', { puzzleId: puzzle.id, attempts: attempts.attempts + 1, highScore: Math.max(data.score, attempts.highScore) })
+          setResult(data);
+          setState('result');
+          const attempts = cookies['semantiq-attempts'];
+          if (attempts === undefined || attempts.puzzleId !== puzzle.id) {
+            setCookie('semantiq-attempts', { puzzleId: puzzle.id, attempts: 1, highScore: data.score })
+          } else {
+            setCookie('semantiq-attempts', { puzzleId: puzzle.id, attempts: attempts.attempts + 1, highScore: Math.max(data.score, attempts.highScore) })
+          }
         }
+        setLoadingResult(false);
       })
   }
 
@@ -58,7 +73,7 @@ function App() {
       })
   }, []);
 
-  const [cookies, setCookie, removeCookie] = useCookies(['semantiq-attempts']);
+  const [cookies, setCookie] = useCookies(['semantiq-attempts']);
 
   return (
     <div className="flex flex-col h-screen justify-start bg-slate-50">
@@ -72,6 +87,7 @@ function App() {
         {state === 'result' && <Result puzzle={puzzle} word={word} result={result} startGame={startGame} />}
 
       </main>
+      <ToastContainer />
     </div>
   );
 }
