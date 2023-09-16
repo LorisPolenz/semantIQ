@@ -4,8 +4,12 @@ function Game({ puzzle, submit }) {
     event.preventDefault();
     submit(event.target[0].value);
   }
-  const wordGroup = words => <div className="grid grid-cols-2 gap-2 mx-20 text-slate-700">
-    {words.map(word => <div className="text-center text-2xl" key={word}>{word}</div>)}</div>
+  const wordPair = (w1, w2) =>
+    <div className="space-x-6 text-center"><span>{w1}</span><span>{w2}</span></div>
+  const wordGroup = words => <div className="content-center text-2xl text-slate-700 leading-tight">
+    {wordPair(words[0], words[1])}
+    {wordPair(words[2], words[3])}
+  </div>
 
   return (
     <>
