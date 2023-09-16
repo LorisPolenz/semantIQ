@@ -20,7 +20,7 @@ function Game({ puzzle, submit }) {
       <section className="text-center my-5 text-slate-800 mt-0 mb-0">
         <form onSubmit={handleSubmit} className="place-items-center text-center">
           <input type="text" autoFocus placeholder="find a word..." className="text-2xl w-2/3 text-center rounded py-1 mr-1 border-2 border-slate-400 focus-visible:border-slate-400" ></input>
-          <button type="submit" className="bg-slate-400 hover:bg-slate-600 text-slate-100 border-2 border-slate-400 py-1 px-4 rounded inline-flex items-center mt-2">
+          <button type="submit" className="text-2xl bg-slate-400 hover:bg-slate-600 text-slate-100 border-2 border-slate-400 py-1 px-4 rounded inline-flex items-center mt-2">
             ▶
           </button>
         </form>
