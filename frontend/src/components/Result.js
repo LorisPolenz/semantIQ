@@ -23,7 +23,7 @@ function Result({ puzzle, word, result, startGame, shareResults }) {
         {wordGroup(match)}
       </section>
       <section className="grid text-center my-5 text-slate-800 content-center place-items-center">
-        <div className="bg-white text-slate-800 border-2 border-slate-400 py-1 px-4 rounded mt-2 text-lg w-2/3 text-center">
+        <div className="bg-white text-slate-800 border-2 border-slate-400 py-1 px-4 rounded mt-2 text-2xl w-2/3 text-center">
           {word}
         </div>
 
