@@ -3,10 +3,13 @@ import os
 from datetime import datetime
 import pytz
 
-es = Elasticsearch(
-    cloud_id=os.getenv("ELASTIC_CLOUD_ID"),
-    basic_auth=(os.getenv("ELASTIC_USER"), os.getenv("ELASTIC_PASSWORD"))
-)
+try:
+    es = Elasticsearch(
+        cloud_id=os.getenv("ELASTIC_CLOUD_ID"),
+        basic_auth=(os.getenv("ELASTIC_USER"), os.getenv("ELASTIC_PASSWORD"))
+    )
+except:
+    es = None
 
 INDEX_NAME = 'semantiq_logs'
 
