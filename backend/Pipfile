@@ -8,6 +8,8 @@ Flask = "*"
 Gunicorn = "*"
 openai = "*"
 numpy = "*"
+elasticsearch = "*"
+pytz = "*"
 
 [dev-packages]
 
