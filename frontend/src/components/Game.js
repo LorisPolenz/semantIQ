@@ -13,16 +13,24 @@ function Game({ puzzle, submit }) {
 
   return (
     <>
-      <section className="pt-11 pb-0">
-        <div className="text-center text-xl text-slate-500">stay close to</div>
+      <section className="pt-0 pb-0">
+        <div className="text-center text-xl text-slate-500 mb-1">stay close to</div>
         <div className="text-green-800">
         {wordGroup(match)}
         </div>
       </section>
-      <section className="text-center my-5 text-slate-800 mt-2">
+      {/* <section className="text-center my-5 text-slate-200 mt-3">
         <form onSubmit={handleSubmit} className="place-items-center text-center">
-          <input type="text" autoFocus placeholder="Find a word..." className="w-2/3 text-center rounded py-1 mr-1 border-2 border-slate-400 focus-visible:border-slate-400" ></input>
-          <button type="submit" className="text-xl bg-slate-400 hover:bg-slate-600 text-slate-100 border border-slate-400 py-1 px-4 rounded inline-flex items-center mt-2">
+          <input type="text" autoFocus placeholder="find a word..." className="placeholder:text-slate-300 text-3xl font-bold w-2/3 text-center rounded py-1 mr-1 border-2 border-slate-800 focus-visible:border-slate-800" ></input>
+          <button type="submit" className="text-2xl bg-slate-400 hover:bg-slate-600 text-slate-100 border-slate-400 pb-3 pt-2 px-4 rounded ml-2">
+            ▶
+          </button>
+        </form>
+      </section> */}
+      <section className="mt-3 mb-3">
+        <form onSubmit={handleSubmit} className="place-items-center text-center">
+          <input type="text" autoFocus placeholder="find a word..." className="placeholder:text-slate-300  text-3xl font-bold text-center text-zinc-800" ></input>
+          <button type="submit" className="text-2xl bg-sky-800 hover:bg-sky-600 rounded text-slate-100 border-0 px-3 ml-2">
             ▶
           </button>
         </form>
