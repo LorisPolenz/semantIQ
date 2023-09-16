@@ -1,9 +1,14 @@
 import logging
-from flask import Flask, request, Response, make_response, send_file, jsonify
+import os
+from random import randint
+
+from flask import Flask, request, Response, make_response, send_file, jsonify, send_from_directory
 
 from semantiq.evaluate import evaluate
 
-app = Flask(__name__)
+
+FRONTEND_STATIC_FOLDER = os.path.join(os.path.dirname(__file__), '../../frontend/build')
+app = Flask(__name__, static_folder=FRONTEND_STATIC_FOLDER)
 
 
 # Define CORS middleware function
@@ -40,11 +45,6 @@ class NoPing(logging.Filter):
         )
 
 
-@app.route('/')
-def hello_world():
-    return 'version 001'
-
-
 @app.route('/ping')
 def ping():
     return 'pong'
@@ -52,10 +52,9 @@ def ping():
 
 @app.route('/get_puzzle')
 def get_puzzle_route():
-    return jsonify({
-        'groupPos': ['happy', 'jump', 'table', 'dog'],
-        'groupNeg': ['apple', 'moon', 'blue', 'smile'],
-    })
+    id = randint(0, 99)
+    # load file
+    return send_file(f'../puzzles/{id}.json')
 
 
 # POST /evaluate
@@ -63,6 +62,21 @@ def get_puzzle_route():
 def evaluate_route():
     evaluation_request = request.get_json()
     return evaluate(evaluation_request['puzzle'], evaluation_request['word'])
+
+
+
+
+# Serve React App
+@app.route('/')
+def serve_index():
+    print(FRONTEND_STATIC_FOLDER)
+    return send_from_directory(FRONTEND_STATIC_FOLDER, 'index.html')
+
+
+@app.route('/<path:path>')
+def serve(path):
+    print(f'{FRONTEND_STATIC_FOLDER}{path}')
+    return send_from_directory(FRONTEND_STATIC_FOLDER, path)
 
 
 app.logger.addFilter(NoPing())

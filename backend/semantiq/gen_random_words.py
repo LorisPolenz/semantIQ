@@ -1,4 +1,5 @@
 # script to generate a list of random words
+import json
 import os
 import random
 from typing import List
@@ -99,7 +100,6 @@ def random_puzzle():
 
 def find_closest_words(puzzle):
     # print which of the word from group one is closest to which of the words of group2
-    embeddings = load_default_embeddings()  # dict word -> np.array
     group_neg = puzzle['groupNeg']
     group_pos = puzzle['groupPos']
     most_similar = None
@@ -107,7 +107,7 @@ def find_closest_words(puzzle):
     for w1 in group_neg:
         for w2 in group_pos:
             sim = cosine_similarity(embedding(w1), embedding(w2))
-            print(f'{w1} {w2} {sim}')
+            # print(f'{w1} {w2} {sim}')
             if sim > max_similarity:
                 max_similarity = sim
                 most_similar = (w1, w2)
@@ -115,13 +115,19 @@ def find_closest_words(puzzle):
 
 
 def main():
-    # words = get_all_words()
-    # print(len(words))
-    # print(words)
-    puzzle = random_puzzle()
-    print(puzzle)
-    print('--')
-    print(find_closest_words(puzzle))
+    random.seed(0)
+    i = 0
+    while i < 100:
+        puzzle = random_puzzle()
+        puzzle['id'] = i
+        most_similar, max_similarity = find_closest_words(puzzle)
+        if max_similarity > 0.84:
+            print(f'Skipping due to similarity {max_similarity} ({most_similar})')
+        else:
+            print(f'Writing puzzle #{i} {puzzle}')
+            with open(os.path.join(os.path.dirname(__file__), f'../puzzles/{i}.json'), 'w') as f:
+                json.dump(puzzle, f)
+            i += 1
 
 
 if __name__ == '__main__':
