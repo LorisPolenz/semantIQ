@@ -7,9 +7,9 @@ function InfoModal({ toggle }) {
         <button onClick={toggle} className="h-8 aspect-square rounded-full text-slate-400 border-2 border-slate-400 justify-center mt-4 text-center scale-150 justify-self-end">x</button>
       </header>
       <main className="flex flex-col grow justify-center gap-4">
-        <p>The goal ist to find a word that matches the semantic meaning of the first group of words as well as possible, while having the lowest possible similarity to the second group of words.</p>
-        <p>ChatGPT will evaluate your guess and give it a score based on how many of the positive words where matched closer than the negative words.</p>
-        <p>A new word set will be published every day. You can try as often as you want, but we'll keep track of how many tries you need to achieve your highscore.</p>
+        <p>This is a word association game. Your challenge is to come up with a word that is closely related to the first set of words, but not to the second set.</p>
+        <p>ChatGPT will evaluate your guess by sorting all words based on their relevance to your chosen word. The top four most relevant words will be selected. You'll earn points based on how many of these top four words belong to the first group.</p>
+        <p>A fresh set of words will be introduced daily. Feel free to try as many times as you'd like. Just note that if you decide to share your results, the number of attempts will also be included.</p>
       </main>
       <footer className="grid grid-cols-1 place-items-center font-extralight">
         <div>Created at <a href="https://devpost.com/software/semantiq">HackZurich</a> by <a href='https://www.linkedin.com/in/52808388/' className='font-light'>Fela</a>, <a href='https://github.com/LorisPolenz' className='font-light'>Loris</a> & <a href='https://www.linkedin.com/in/alexmoeri/' className='font-light'>Alex</a></div>
