@@ -31,6 +31,7 @@ def evaluate_with_gpt(puzzle, word):
 
 
 def evaluate(puzzle, word):
+    word = word.lower()
     if not validate_user_input(word):
         log_evaluate(word, None, False)
         return jsonify({'error': 'Invalid word'})
