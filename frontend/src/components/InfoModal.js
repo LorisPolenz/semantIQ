@@ -11,7 +11,7 @@ function InfoModal({ toggle }) {
       <main className="flex flex-col grow justify-center gap-4 font-light">
         <p>This is a word association game. Your challenge is to come up with a word that is closely related to the first set of words, but not to the second set.</p>
         <p>ChatGPT will evaluate your guess by sorting all words based on their relevance to your chosen word. The top four most relevant words will be selected. You'll earn points based on how many of these top four words belong to the first group.</p>
-        <p>A fresh set of words will be introduced daily. Feel free to try as many times as you'd like. Just note that if you decide to share your results, the number of attempts will also be included.</p>
+        <p>A fresh set of words will be introduced daily. Feel free to try as many times as you'd like. Just note that if you decide to share your results, the number of attempts will also be included. And if you can't wait for the next one, just try to play the the current one inverted - scoring 0 points is just as hard as scoring 4.</p>
       </main>
       <footer className="grid grid-cols-1 place-items-center font-extralight">
         <div>Created at <a href="https://devpost.com/software/semantiq">HackZurich</a> by <a href='https://github.com/fela' className='font-light'>Fela</a>, <a href='https://github.com/LorisPolenz' className='font-light'>Loris</a> & <a href='https://www.linkedin.com/in/alexmoeri/' className='font-light'>Alex</a></div>
