@@ -17,12 +17,15 @@ function App() {
     score: 0,
     topWords: []
   })
-  const [loadingResult, setLoadingResult] = useState(true);
+  const [loadingResult, setLoadingResult] = useState(false);
   const [word, setWord] = useState('');
   const [showInfoModal, setShowInfoModal] = useState(false);
   const toggleInfoModal = () => setShowInfoModal(!showInfoModal);
   const [state, setState] = useState('game');
-  const startGame = () => setState('game');
+  const startGame = () => { setState('game'); setInput(""); }
+  const [input, setInput] = useState('');
+  const handleInputChange = e => setInput(e.target.value);
+
   const maskString = (str) => {
     const firstChar = str.slice(0, 1);
     const maskedPart = "●".repeat(str.length - 1);
@@ -90,6 +93,7 @@ function App() {
             progress: undefined,
             theme: "light",
           });
+          setInput("");
         } else {
           setResult(data);
           setState('result');
@@ -122,8 +126,8 @@ function App() {
       </header>
       <main className='z-0 grow flex flex-col'>
         {showInfoModal ? <InfoModal toggle={toggleInfoModal} /> : null}
-        {state === 'game' && <Game puzzle={puzzle} submit={submit} />}
-        {state === 'result' && <Result puzzle={puzzle} word={word} result={result} startGame={startGame} shareResults={shareResults}/>}
+        {state === 'game' && <Game puzzle={puzzle} submit={submit} loadingPuzzle={loadingPuzzle} loadingResult={loadingResult} input={input} change={handleInputChange} />}
+        {state === 'result' && <Result puzzle={puzzle} word={word} result={result} startGame={startGame} shareResults={shareResults} />}
       </main>
       <ToastContainer />
     </div>
