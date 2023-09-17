@@ -14,7 +14,7 @@ function InfoModal({ toggle }) {
         <p>A fresh set of words will be introduced daily. Feel free to try as many times as you'd like. Just note that if you decide to share your results, the number of attempts will also be included.</p>
       </main>
       <footer className="grid grid-cols-1 place-items-center font-extralight">
-        <div>Created at <a href="https://devpost.com/software/semantiq">HackZurich</a> by <a href='https://www.linkedin.com/in/52808388/' className='font-light'>Fela</a>, <a href='https://github.com/LorisPolenz' className='font-light'>Loris</a> & <a href='https://www.linkedin.com/in/alexmoeri/' className='font-light'>Alex</a></div>
+        <div>Created at <a href="https://devpost.com/software/semantiq">HackZurich</a> by <a href='https://github.com/fela' className='font-light'>Fela</a>, <a href='https://github.com/LorisPolenz' className='font-light'>Loris</a> & <a href='https://www.linkedin.com/in/alexmoeri/' className='font-light'>Alex</a></div>
       </footer>
     </div>
   );
