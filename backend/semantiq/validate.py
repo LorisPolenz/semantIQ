@@ -9,9 +9,9 @@ def validate_user_input(input_str: str) -> bool:
         return False
 
     with open(WORDS_FILE, 'r') as f:
-        keywords = f.read().split('\n')
+        keywords = [k.lower() for k in f.read().split('\n')]
 
-    if input_str in keywords:
+    if input_str.lower() in keywords:
         return True
     else:
         return False

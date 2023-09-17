@@ -1,3 +1,4 @@
+import datetime
 import logging
 import os
 from random import randint
@@ -50,9 +51,13 @@ def ping():
     return 'pong'
 
 
+START_DATE = datetime.date(2023, 9, 16)
+
+
 @app.route('/get_puzzle')
 def get_puzzle_route():
-    id = randint(0, 99)
+    days_since_start = (datetime.date.today() - START_DATE).days
+    id = days_since_start % 1000
     log_get_puzzle()
     # load file
     return send_file(f'../puzzles/{id}.json')

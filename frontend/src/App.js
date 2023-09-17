@@ -64,7 +64,8 @@ function App() {
   const shareResults = async () => {
     const attempts = cookies['semantiq-attempts'];
     const maskedWord = maskString(word);
-    const text = `semantiq.app #${puzzle.id}: ${maskedWord} ${result.score}/4 after ${attempts.attempts} try`;
+    const tries = attempts.attempts === 1 ? 'try' : 'tries';
+    const text = `semantiq.app #${puzzle.id}: ${maskedWord} ${result.score}/4 after ${attempts.attempts} ${tries}`;
     shareOrCopyText(text);
   }
   const submit = word => {

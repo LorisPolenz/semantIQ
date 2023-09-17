@@ -117,7 +117,7 @@ def find_closest_words(puzzle):
 def main():
     random.seed(0)
     i = 0
-    while i < 100:
+    while i < 1000:
         puzzle = random_puzzle()
         puzzle['id'] = i
         most_similar, max_similarity = find_closest_words(puzzle)
