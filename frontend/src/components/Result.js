@@ -16,32 +16,33 @@ function Result({ puzzle, word, result, startGame, shareResults }) {
 
   return (
     <>
-      <section className="text-center text-slate-400 text-lg">
-        results
+      <section >
+
       </section>
-      <section className="pt-8 pb-4">
+      <section className="pt-6 pb-4">
+        <p className="text-center text-slate-400 text-lg">results</p>
         {wordGroup(match)}
       </section>
-      <section className="grid text-center my-5 text-slate-800 content-center place-items-center">
+      <section className="grid text-center text-slate-800 content-center place-items-center">
         <div className="bg-white text-slate-800 border-2 border-slate-400 py-1 px-4 rounded mt-2 text-2xl w-2/3 text-center">
           {word}
         </div>
 
       </section>
-      <section className="pt-4 pb-8">
+      <section className="pt-4 pb-6">
         {wordGroup(avoid)}
       </section>
 
-      <section className="grid text-center my-5 text-slate-800 content-center place-items-center">
-        <div className="text-center text-slate-400 text-lg">score</div>
+      <section className="grid text-center mb-6 text-slate-800 content-center place-items-center">
+        <div className="text-center text-slate-400 text-lg mb-1">score</div>
         <ScoreBoard score={score} maxScore={topWords?.length} />
       </section>
       <section className="flex flex-row justify-center gap-4 mt-2">
-        <button onClick={shareResults} className="text-slate-100 bg-slate-400 py-1 px-6 rounded text-lg text-center aspect-square">
+        <button onClick={shareResults} className="text-slate-100 bg-slate-400 hover:bg-slate-600 active:bg-slate-600 py-1 px-6 rounded text-lg text-center aspect-square">
           <FontAwesomeIcon icon={faShare} size="3x" />
           <p>share</p>
         </button>
-        <button onClick={startGame} className="text-slate-100 bg-slate-400 py-1 px-6 rounded text-lg text-center aspect-square">
+        <button onClick={startGame} className="text-slate-100 bg-slate-400 hover:bg-slate-600 active:bg-slate-600 py-1 px-6 rounded text-lg text-center aspect-square">
           <FontAwesomeIcon icon={faRotateLeft} size="3x" />
           <p>retry</p>
         </button>
