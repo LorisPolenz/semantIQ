@@ -37,14 +37,14 @@ function Result({ puzzle, word, result, startGame, shareResults }) {
         <div className="text-center text-slate-400 text-lg mb-1">score</div>
         <ScoreBoard score={score} maxScore={topWords?.length} />
       </section>
-      <section className="flex flex-row justify-center gap-4 mt-2">
+      <section className="flex flex-row justify-center gap-4 mt-2 px-10">
         <button onClick={shareResults} className="text-slate-100 bg-slate-400 hover:bg-slate-600 active:bg-slate-600 py-1 px-6 rounded text-lg text-center aspect-square">
           <FontAwesomeIcon icon={faShare} size="3x" />
-          <p>share</p>
+          <p>share score</p>
         </button>
-        <button onClick={startGame} className="text-slate-100 bg-slate-400 hover:bg-slate-600 active:bg-slate-600 py-1 px-6 rounded text-lg text-center aspect-square">
+        <button onClick={startGame} className="text-slate-100 bg-slate-400 hover:bg-slate-600 active:bg-slate-600 py-1 px-7 rounded text-lg text-center">
           <FontAwesomeIcon icon={faRotateLeft} size="3x" />
-          <p>retry</p>
+          <p>play again</p>
         </button>
       </section>
 
