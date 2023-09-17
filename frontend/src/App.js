@@ -125,7 +125,7 @@ function App() {
       <header className="text-lg">
         <button onClick={toggleInfoModal} className="h-8 aspect-square rounded-full text-slate-400 border-2 border-slate-400 justify-center m-4 text-center float-right scale-125">i</button>
       </header>
-      <main className='z-0 grow flex flex-col'>
+      <main className='z-0 grow flex flex-col md:mx-36 lg:mx-52 xl:mx-80 2xl:mx-96'>
         {showInfoModal ? <InfoModal toggle={toggleInfoModal} /> : null}
         {state === 'game' && <Game puzzle={puzzle} submit={submit} loadingPuzzle={loadingPuzzle} loadingResult={loadingResult} input={input} change={handleInputChange} />}
         {state === 'result' && <Result puzzle={puzzle} word={word} result={result} startGame={startGame} shareResults={shareResults} />}
