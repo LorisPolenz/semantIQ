@@ -15,9 +15,6 @@ function Game({ puzzle, submit, loadingPuzzle, loadingResult, input, change }) {
     {wordPair(words[2], words[3])}
   </div>
 
-  console.log('input empty', input === "");
-  console.log('loading', loadingResult);
-
   return (
     <>
       <section className="pt-6 pb-4">
