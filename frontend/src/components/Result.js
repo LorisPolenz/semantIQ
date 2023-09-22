@@ -11,7 +11,8 @@ function Result({ puzzle, word, result, startGame, shareResults }) {
     <div className="space-x-6 text-center"><span className={topWords.includes(w1) ? match.includes(w1) ? 'text-green-700' : avoid.includes(w1) ? 'text-red-700' : null : null}>{w1}</span><span className={topWords.includes(w2) ? match.includes(w2) ? 'text-green-700' : avoid.includes(w2) ? 'text-red-700' : null : null}>{w2}</span></div>
   const wordGroup = words => <div className="content-center text-2xl text-slate-700 leading-tight">
     {wordPair(words[0], words[1])}
-    {wordPair(words[2], words[3])}
+    <div className="space-x-6 text-center">
+      <span className={topWords.includes(words[2]) ? match.includes(words[2]) ? 'text-green-700' : avoid.includes(words[2]) ? 'text-red-700' : null : null}>{words[2]}</span></div>
   </div>
 
   return (

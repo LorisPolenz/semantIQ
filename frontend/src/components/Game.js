@@ -12,7 +12,7 @@ function Game({ puzzle, submit, loadingPuzzle, loadingResult, input, change }) {
     <div className="space-x-6 text-center"><span>{w1}</span><span>{w2}</span></div>
   const wordGroup = words => <div className="content-center text-2xl text-slate-700 leading-tight">
     {wordPair(words[0], words[1])}
-    {wordPair(words[2], words[3])}
+    <div className="space-x-6 text-center"><span>{words[2]}</span></div>
   </div>
 
   return (

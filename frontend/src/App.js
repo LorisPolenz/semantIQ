@@ -65,7 +65,7 @@ function App() {
     const attempts = cookies['semantiq-attempts'];
     const maskedWord = maskString(word);
     const tries = attempts.attempts === 1 ? 'try' : 'tries';
-    const text = `semantiq.app #${puzzle.id}: ${maskedWord} ${result.score}/4 after ${attempts.attempts} ${tries}`;
+    const text = `semantiq.app #${puzzle.id}: ${maskedWord} ${result.score}/3 after ${attempts.attempts} ${tries}`;
     shareOrCopyText(text);
   }
   const submit = word => {
@@ -75,7 +75,8 @@ function App() {
       puzzle: puzzle,
       word: word,
     }
-    fetch('https://semantiq-backend.onrender.com/evaluate', {
+    fetch('https://semantiq.app/evaluate', {
+    //fetch('http://localhost:5000/evaluate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -110,7 +111,8 @@ function App() {
   }
 
   useEffect(() => {
-    fetch('https://semantiq-backend.onrender.com/get_puzzle')
+    fetch('https://semantiq.app/get_puzzle')
+    //fetch('http://localhost:5000/get_puzzle')
       .then((res) => res.json())
       .then((data) => {
         setPuzzle(data);

@@ -58,6 +58,7 @@ START_DATE = datetime.date(2023, 9, 16)
 def get_puzzle_route():
     days_since_start = (datetime.date.today() - START_DATE).days
     id = days_since_start % 1000
+    id = randint(0, 999)
     log_get_puzzle()
     # load file
     return send_file(f'../puzzles/{id}.json')

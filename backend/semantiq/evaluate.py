@@ -38,7 +38,7 @@ def evaluate(puzzle, word):
     group_pos = puzzle['groupPos']
 
     res = evaluate_with_gpt(puzzle, word)
-    score = sum(r in group_pos for r in res[:4])
+    score = sum(r in group_pos for r in res[:3])
     log_evaluate(word, score, True)
 
-    return jsonify({'score': score, 'topWords': res[:4]})
+    return jsonify({'score': score, 'topWords': res[:3]})

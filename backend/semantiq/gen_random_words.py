@@ -2,6 +2,7 @@
 import json
 import os
 import random
+from copy import deepcopy
 from typing import List
 import re
 
@@ -85,7 +86,7 @@ def get_all_words() -> List[str]:
     return list(set(re.split(r'\s*,\s*', WORDS.strip())))
 
 
-SIZE_PER_GROUP = 4
+SIZE_PER_GROUP = 3
 
 
 def random_puzzle():
@@ -93,8 +94,8 @@ def random_puzzle():
     words = get_all_words()
     random.shuffle(words)
     return {
-        'groupPos': words[:SIZE_PER_GROUP],
-        'groupNeg': words[SIZE_PER_GROUP:SIZE_PER_GROUP*2]
+        'groupPos': sorted(words[:SIZE_PER_GROUP], key=lambda x: len(x)),
+        'groupNeg': sorted(words[SIZE_PER_GROUP:SIZE_PER_GROUP*2], key=lambda x: len(x)),
     }
 
 
@@ -121,7 +122,7 @@ def main():
         puzzle = random_puzzle()
         puzzle['id'] = i
         most_similar, max_similarity = find_closest_words(puzzle)
-        if max_similarity > 0.84:
+        if max_similarity > 0.82:
             print(f'Skipping due to similarity {max_similarity} ({most_similar})')
         else:
             print(f'Writing puzzle #{i} {puzzle}')
