@@ -39,15 +39,18 @@ def log_get_puzzle() -> None:
 
 
 def log_evaluate(entered_word: str, scores, input_was_valid: bool) -> None:
-    log_to_elastic(
-        document={
-            'entered_word': entered_word,
-            'score': scores,
-            'input_was_valid': input_was_valid,
-            'endpoint': 'evaluate'
-        },
-        index_name=INDEX_NAME
-    )
+    try:
+        log_to_elastic(
+            document={
+                'entered_word': entered_word,
+                'score': scores,
+                'input_was_valid': input_was_valid,
+                'endpoint': 'evaluate'
+            },
+            index_name=INDEX_NAME
+        )
+    except Exception as e:
+        print(f"Error logging evaluate: {e}")
 
 
 # log_get_puzzle()
