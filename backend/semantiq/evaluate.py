@@ -27,7 +27,11 @@ def evaluate_with_gpt(puzzle, word):
 
     prompt = PROMPT_EVALUATE.format(word, all_w)
 
-    return chatgpt(prompt, temperature=0.0).strip().split(', ')
+    for i in range(10):
+        res = chatgpt(prompt, temperature=0.1, seed=1).strip().split(', ')
+        if all(r in all_w for r in res):
+            return res
+    raise ValueError('GPT failed to return valid words')
 
 
 def evaluate(puzzle, word):

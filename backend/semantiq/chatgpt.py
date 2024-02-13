@@ -7,7 +7,7 @@ openai.api_key = os.environ['OPENAI_API_KEY']
 
 
 @cache_to_disk
-def chatgpt(system_prompt: str, **kwargs):
+def chatgpt(system_prompt: str, seed=0, **kwargs):
     # seed is just for caching purposes
     messages = [
         {'role': 'system', 'content': system_prompt}
