@@ -27,7 +27,7 @@ function App() {
   const handleInputChange = e => setInput(e.target.value);
 
   const maskString = (str) => {
-    const firstChar = str.slice(0, 1);
+    const firstChar = str.slice(0, 1).toUpperCase();
     const maskedPart = "●".repeat(str.length - 1);
     return firstChar + maskedPart;
   }
@@ -65,7 +65,8 @@ function App() {
     const attempts = cookies['semantiq-attempts'];
     const maskedWord = maskString(word);
     const tries = attempts.attempts === 1 ? 'try' : 'tries';
-    const text = `semantiq.app #${puzzle.id}: ${maskedWord} ${result.score}/3 after ${attempts.attempts} ${tries}`;
+    const seconds = Math.round((Date.parse(Date()) - cookies['semantiq-start-time']) / 1000)
+    const text = `semantiq.app #${puzzle.id}: ${maskedWord} ${result.score}/3 after ${attempts.attempts} ${tries} and ${seconds} seconds`;
     shareOrCopyText(text);
   }
   const submit = word => {
@@ -115,8 +116,12 @@ function App() {
     //fetch('http://localhost:5000/get_puzzle')
       .then((res) => res.json())
       .then((data) => {
+        const startCookie = cookies['semantiq-start-time'];
         setPuzzle(data);
         setLoadingPuzzle(false);
+        if (startCookie === undefined || startCookie.puzzleId != puzzle.id) {
+          setCookie('semantiq-start-time', { puzzleId: puzzle.id, startTime: Date.parse(Date()) })
+        }
       })
   }, []);
 
