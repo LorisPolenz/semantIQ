@@ -65,7 +65,7 @@ function App() {
     const attempts = cookies['semantiq-attempts'];
     const maskedWord = maskString(word);
     const tries = attempts.attempts === 1 ? 'try' : 'tries';
-    const seconds = Math.round((Date.parse(Date()) - cookies['semantiq-start-time']) / 1000)
+    const seconds = Math.round((Date.parse(Date()) - cookies['semantiq-start-time'].startTime) / 1000)
     const text = `semantiq.app #${puzzle.id}: ${maskedWord} ${result.score}/3 after ${attempts.attempts} ${tries} and ${seconds} seconds`;
     shareOrCopyText(text);
   }
