@@ -31,6 +31,7 @@ def evaluate_with_gpt(puzzle, word):
         res = chatgpt(prompt, temperature=0.1, seed=i).strip().split(', ')
         if all(r in all_w for r in res):
             return res
+        print("got invalid words", res, "retrying")
     raise ValueError('GPT failed to return valid words')
 
 
