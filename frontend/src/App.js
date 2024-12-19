@@ -119,8 +119,8 @@ function App() {
         const startCookie = cookies['semantiq-start-time'];
         setPuzzle(data);
         setLoadingPuzzle(false);
-        if (startCookie === undefined || startCookie.puzzleId != puzzle.id) {
-          setCookie('semantiq-start-time', { puzzleId: puzzle.id, startTime: Date.parse(Date()) })
+        if (startCookie === undefined || startCookie.puzzleId != data.id) {
+          setCookie('semantiq-start-time', { puzzleId: data.id, startTime: Date.parse(Date()) })
         }
       })
   }, []);
