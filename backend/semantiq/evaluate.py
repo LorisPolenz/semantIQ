@@ -28,8 +28,9 @@ def evaluate_with_gpt(puzzle, word):
     prompt = PROMPT_EVALUATE.format(word, all_w)
 
     for i in range(10):
-        res = chatgpt(prompt, temperature=0.1*i, seed=i).strip().replace("'", '').replace('"', '').split(', ')
-        if all(r in all_w for r in res):
+        response = chatgpt(prompt, temperature=0.1*i, seed=i).strip().replace("'", '').replace('"', '')
+        res = [r.strip() for r in response.split(',')]
+        if sorted(res) == sorted(all_w):
             return res
         print("got invalid words", res, "retrying")
     raise ValueError('GPT failed to return valid words')
