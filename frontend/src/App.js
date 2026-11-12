@@ -13,6 +13,8 @@ function App() {
     "groupPos": []
   });
   const [loadingPuzzle, setLoadingPuzzle] = useState(true);
+  const [puzzleError, setPuzzleError] = useState(false);
+  const [puzzleRetryCount, setPuzzleRetryCount] = useState(0);
   const [result, setResult] = useState({
     score: 0,
     topWords: []
@@ -70,6 +72,7 @@ function App() {
     shareOrCopyText(text);
   }
   const submit = word => {
+    if (loadingPuzzle || puzzleError || loadingResult) return;
     setLoadingResult(true);
     setWord(word);
     const body = {
@@ -83,7 +86,13 @@ function App() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body)
-    }).then((res) => res.json())
+    }).then(async (res) => {
+      const data = await res.json();
+      if (!res.ok && data['error'] !== "Invalid word") {
+        throw new Error('Guess request failed');
+      }
+      return data;
+    })
       .then((data) => {
         if (data['error'] === "Invalid word") {
           toast.error('I don\'t know this word 😔', {
@@ -98,6 +107,9 @@ function App() {
           });
           setInput("");
         } else {
+          if (data['error']) {
+            throw new Error('Guess request failed');
+          }
           setResult(data);
           setState('result');
           const attempts = cookies['semantiq-attempts'];
@@ -107,23 +119,34 @@ function App() {
             setCookie('semantiq-attempts', { puzzleId: puzzle.id, attempts: attempts.attempts + 1, highScore: Math.max(data.score, attempts.highScore) })
           }
         }
-        setLoadingResult(false);
       })
+      .catch(() => {
+        toast.error('Could not check your word. Please try again.', { position: "top-center" });
+      })
+      .finally(() => setLoadingResult(false));
   }
 
   useEffect(() => {
+    setLoadingPuzzle(true);
+    setPuzzleError(false);
     fetch('https://semantiq.app/get_puzzle')
     //fetch('http://localhost:5000/get_puzzle')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Puzzle request failed');
+        }
+        return res.json();
+      })
       .then((data) => {
         const startCookie = cookies['semantiq-start-time'];
         setPuzzle(data);
-        setLoadingPuzzle(false);
         if (startCookie === undefined || startCookie.puzzleId != data.id) {
           setCookie('semantiq-start-time', { puzzleId: data.id, startTime: Date.parse(Date()) })
         }
       })
-  }, []);
+      .catch(() => setPuzzleError(true))
+      .finally(() => setLoadingPuzzle(false));
+  }, [puzzleRetryCount]);
 
   const [cookies, setCookie] = useCookies(['semantiq-attempts']);
 
@@ -134,7 +157,13 @@ function App() {
       </header>
       <main className='z-0 grow flex flex-col md:mx-36 lg:mx-52 xl:mx-80 2xl:mx-96'>
         {showInfoModal ? <InfoModal toggle={toggleInfoModal} /> : null}
-        {state === 'game' && <Game puzzle={puzzle} submit={submit} loadingPuzzle={loadingPuzzle} loadingResult={loadingResult} input={input} change={handleInputChange} />}
+        {puzzleError && (
+          <div role="alert" className="text-center text-slate-800">
+            <p>Could not load the puzzle. Please try again.</p>
+            <button type="button" onClick={() => setPuzzleRetryCount(count => count + 1)} className="bg-slate-400 hover:bg-slate-600 text-slate-100 py-1 px-4 rounded mt-2">Retry puzzle</button>
+          </div>
+        )}
+        {state === 'game' && <Game puzzle={puzzle} submit={submit} loadingPuzzle={loadingPuzzle} puzzleError={puzzleError} loadingResult={loadingResult} input={input} change={handleInputChange} />}
         {state === 'result' && <Result puzzle={puzzle} word={word} result={result} startGame={startGame} shareResults={shareResults} />}
       </main>
       <ToastContainer />

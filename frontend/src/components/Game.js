@@ -2,11 +2,13 @@ import LoadingIcons from 'react-loading-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 
-function Game({ puzzle, submit, loadingPuzzle, loadingResult, input, change }) {
+function Game({ puzzle, submit, loadingPuzzle, puzzleError, loadingResult, input, change }) {
   const { groupPos: match, groupNeg: avoid } = puzzle;
+  const guessingDisabled = input === "" || loadingPuzzle || puzzleError || loadingResult;
   const handleSubmit = (event) => {
     event.preventDefault();
-    submit(event.target[0].value);
+    if (guessingDisabled) return;
+    submit(input);
   }
   const wordPair = (w1, w2) =>
     <div className="space-x-6 text-center"><span>{w1}</span><span>{w2}</span></div>
@@ -24,7 +26,7 @@ function Game({ puzzle, submit, loadingPuzzle, loadingResult, input, change }) {
       <section className="text-center my-5 text-slate-800 mt-0 mb-0 max-w-md mx-auto">
         <form onSubmit={handleSubmit} className="place-items-center text-center">
           <input onChange={change} value={input} type="text" autoFocus placeholder="find a word..." className="text-2xl w-2/3 text-center rounded py-1 mr-1 border-2 border-slate-400 focus-visible:border-slate-400 outline-none focus:outline-none focus-visible:outline-none " />
-          <button type="submit" disabled={input === "" || loadingResult} className={`bg-slate-400 hover:bg-slate-600 active:bg-slate-600 text-slate-100 border-2 border-slate-400 hover:border-slate-600 active:border-slate-600 py-1 px-4 rounded inline-flex items-center relative top-2 ${input === "" || loadingResult ? 'bg-slate-300 hover:bg-slate-300 border-slate-300 hover:border-slate-300' : null}`}>
+          <button type="submit" disabled={guessingDisabled} className={`bg-slate-400 hover:bg-slate-600 active:bg-slate-600 text-slate-100 border-2 border-slate-400 hover:border-slate-600 active:border-slate-600 py-1 px-4 rounded inline-flex items-center relative top-2 ${guessingDisabled ? 'bg-slate-300 hover:bg-slate-300 border-slate-300 hover:border-slate-300' : null}`}>
             {loadingResult ? <LoadingIcons.Rings height="32" width="24" /> : <FontAwesomeIcon icon={faPlay} size="2xl" />}
           </button>
         </form>
